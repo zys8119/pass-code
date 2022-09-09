@@ -1,5 +1,5 @@
 <template>
-    <div class="Home">
+    <div class="Home" @click="inFull" ref="el">
         <div class="card">
             <div class="cardContent">
                 <div>{{ dayStr }}</div>
@@ -101,6 +101,16 @@ onMounted(() => {
         margin:2
     })
 })
+const inFullShow = ref(false)
+const el = ref()
+const inFull = ()=>{
+    if(inFullShow.value){
+        document.exitFullscreen()
+    }else {
+        document.body.requestFullscreen()
+    }
+    inFullShow.value = !inFullShow.value
+}
 </script>
 
 <style scoped lang="less">
@@ -111,6 +121,8 @@ onMounted(() => {
     @themeColor:#01a95b;
     @unit:15px;
     font-family: 黑体, 微软雅黑;
+    background-color: #f8f8f8;
+    min-height: 100%;
     .footer_msg{
         display: flex;
         justify-content: center;
