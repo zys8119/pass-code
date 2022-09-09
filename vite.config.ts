@@ -2,6 +2,7 @@ import {defineConfig} from "vite"
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import vue from '@vitejs/plugin-vue'
+import {resolve} from 'path'
 
 export default defineConfig({
     plugins:[
@@ -18,5 +19,10 @@ export default defineConfig({
             dts:true
         }),
         Components()
-    ]
+    ],
+    resolve:{
+        alias:{
+            "@":resolve(__dirname,"./src")
+        }
+    }
 })

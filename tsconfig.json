@@ -5,7 +5,11 @@
     "sourceMap": true,
     "types": [
       "vite/client"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "exclude": [
     "node_modules"

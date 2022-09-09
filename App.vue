@@ -1,13 +1,11 @@
 <template>
     <div class="App">
-            asdasd
+        <router-view></router-view>
     </div>
 </template>
 
 <script setup lang="ts">
-onMounted(()=>{
-    console.log(111)
-})
+
 </script>
 
 <style scoped lang="less">
