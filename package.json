@@ -4,7 +4,8 @@
   "description": "通行码",
   "main": "index.js",
   "scripts": {
-    "serve": "vite --host"
+    "serve": "vite --host",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
