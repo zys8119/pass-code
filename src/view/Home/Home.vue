@@ -19,7 +19,7 @@
                         <div>宁波健康码</div>
                         <div>绿码：健康状态为低风险</div>
                     </div>
-                    <div class="_right">
+                    <div class="_right" @click="goxck">
                         <div>疫情重点地区核验</div>
                         <div>查看7天是否到过疫情重点地区</div>
                         <div>
@@ -102,6 +102,9 @@ onMounted(() => {
     })
 })
 const el = ref()
+const goxck = ()=>{
+    window.open("weixin://app/wxd930ea5d5a258f4f/jumpWxa/?userName=gh_0ed5d82fd775")
+}
 </script>
 
 <style scoped lang="less">
