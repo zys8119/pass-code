@@ -44,7 +44,7 @@
                     </div>
                     <div class="_number">
                         <div>24</div>
-                        <div>小时</div>
+                        <div>小时内</div>
                     </div>
                     <div class="_result">阴性</div>
                     <div class="_result_msg">
