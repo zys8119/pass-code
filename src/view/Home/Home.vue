@@ -1,5 +1,5 @@
 <template>
-    <div class="Home" @click="inFull" ref="el">
+    <div class="Home" ref="el">
         <div class="card">
             <div class="cardContent">
                 <div>{{ dayStr }}</div>
@@ -101,16 +101,7 @@ onMounted(() => {
         margin:2
     })
 })
-const inFullShow = ref(false)
 const el = ref()
-const inFull = ()=>{
-    if(inFullShow.value){
-        document.exitFullscreen()
-    }else {
-        document.body.requestFullscreen()
-    }
-    inFullShow.value = !inFullShow.value
-}
 </script>
 
 <style scoped lang="less">
