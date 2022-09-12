@@ -18,7 +18,8 @@ export default defineConfig({
                 /\.md$/, // .md
             ],
             imports:[
-                "vue"
+                "vue",
+                "vue-router"
             ],
             dts:true
         }),

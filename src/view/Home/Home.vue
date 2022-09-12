@@ -9,8 +9,8 @@
         </div>
         <div class="centerBox">
             <div class="centerBoxContent">
-                <div class="_top">{{user_name}} <span @click="show = !show">{{show ? '隐藏' : '显示'}}</span> </div>
-                <div class="_unit_name">{{userInfo.unit_name}}</div>
+                <div class="_top">{{userInfo.user_name_slot || user_name}} <span @click="show = !show">{{show ? '隐藏' : '显示'}}</span> </div>
+                <div class="_unit_name">{{userInfo.unit_name_slot || userInfo.unit_name}}</div>
                 <div class="_qr_code">
                     <div class="_left">
                         <div>
@@ -43,13 +43,15 @@
                         <span>核酸检测采样</span>
                     </div>
                     <div class="_number">
-                        <div>24</div>
-                        <div>小时内</div>
+                        <div>{{ userInfo.day }}</div>
+                        <div >{{userInfo.day_slot || '小时内'}}</div>
                     </div>
                     <div class="_result">阴性</div>
                     <div class="_result_msg">
-                        <div>距离72小时剩余</div>
-                        <div>20时26分</div>
+                        <div v-if="userInfo.maxDay_slot">{{ userInfo.maxDay_slot }}</div>
+                        <div v-else>距离{{userInfo.maxDay}}小时剩余</div>
+                        <div  v-if="userInfo.maxDayMsg_slot">{{ userInfo.maxDayMsg_slot }}</div>
+                        <div  v-else>{{userInfo.maxDay - userInfo.day - 8}}时{{60 - minute}}分</div>
                     </div>
                 </div>
                 <div>
@@ -71,7 +73,6 @@
             <div>本服务由宁波市人民政府提供</div>
             <div>服务热线： 0574-12345</div>
         </div>
-<!--        <img class="bj" :src="`./images/a.jpg`" alt="">-->
     </div>
 </template>
 
@@ -79,17 +80,37 @@
 import dayjs, {Dayjs} from "dayjs"
 import {toCanvas} from "qrcode"
 
+const {query} = useRoute()
 const day = ref<Dayjs>(dayjs())
 const dayStr = computed(() => (day.value as Dayjs).format("MM月DD日"))
 const timeStr = computed(() => (day.value as Dayjs).format("HH:mm:ss"))
-const userInfo = ref({
+const minute = computed(() => (day.value as Dayjs).minute())
+const userInfo:any = ref({
     name:"张云山",
-    unit_name:"浙江省宁波市鄞州区邱隘镇引发幼儿园（东雅园）"
+    unit_name:"浙江省宁波市鄞州区邱隘镇引发幼儿园（东雅园）",
+    day:24,
+    maxDay:72
 })
 const show = ref(false)
 const user_name = computed(()=>userInfo.value.name.replace(/(.)(.)(.*)/,`$1${show.value ? '$2' :'*'}$3`))
 const canvas = ref()
-onMounted(() => {
+onMounted(async () => {
+    const config:any = {};
+    try {
+        const res = (await (await fetch("./config.json")).json());
+        for (let k in res){
+            if(res[k]){
+                config[k] = res[k]
+            }
+        }
+    }catch (e) {
+        // err
+    }
+    userInfo.value = {
+        ...userInfo.value,
+        ...config,
+        ...query,
+    }
     setInterval(() => {
         day.value = dayjs()
     }, 1000)
