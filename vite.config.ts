@@ -6,6 +6,9 @@ import {resolve} from 'path'
 
 export default defineConfig({
     base:"",
+    build:{
+      outDir:"./docs"
+    },
     plugins:[
         vue(),
         AutoImport({
