@@ -7,5 +7,5 @@
     "day_slot":null,
     "maxDay_slot":null,
     "maxDayMsg_slot":"1日10小时",
-    "maxDay":null
+    "maxDay":48
 }
