@@ -6,6 +6,6 @@
     "user_name_slot":null,
     "day_slot":null,
     "maxDay_slot":null,
-    "maxDayMsg_slot":"2日2小时",
+    "maxDayMsg_slot":"",
     "maxDay":null
 }
